@@ -1,0 +1,60 @@
+-- how to run migrate ?
+npx sequelize-cli db:migrate
+
+
+-- how to run seed?
+npx sequelize-cli db:seed:all
+
+
+-- how to run project?
+nodemon server.js
+
+---------------------------------------------------------------------------------------------
+
+-- System Structure 
+------------------------------------------------------------
+Frontend → API Routes → Query/Command → Model → Migration → Database
+------------------------------------------------------------
+-- System Structure in backend
+Route → Command/Query → Model → Database
+------------------------------------------------------------
+
+1- Frontend (Client)
+
+-The frontend sends requests to the backend using REST API endpoints.
+
+-It never connects directly to the database.
+
+2- API Layer (Backend)
+
+-Each endpoint is defined in the routes folder.
+
+-Routes only receive the request and call the correct function.
+
+-No business logic is written inside routes.
+
+3- Queries & Commands
+
+-We separate read and write operations:
+
+-Query → used for reading data from the database.
+
+-Command → used for creating, updating, or deleting data.
+
+-This keeps the code organized and easy to maintain.
+
+4- Models
+
+-Queries and Commands use Sequelize Models, not raw SQL.
+
+-Each model represents a database table and its relations.
+
+5- Migrations
+
+-Migrations define the database schema (tables and columns).
+
+-They allow us to version our database and sync changes across environments.
+
+
+---------------------------------------------------------------------------------------------
+

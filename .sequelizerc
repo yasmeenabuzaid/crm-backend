@@ -1,0 +1,12 @@
+const path = require("path");
+
+module.exports = {
+  config: path.resolve("config", "config.js"),
+  "models-path": path.resolve("models"),
+  "seeders-path": path.resolve("seeders"),
+  "migrations-path": path.resolve("migrations"),
+};
+
+
+// Sequelize CLI هو “سطر أوامر” (Command Line Interface) جاهز من Sequelize بيساعدك تديري شغل الداتابيس من التيرمنال بدون ما تكتبي كود كل مرة.
+// يعني بدل ما تعملي كل شي بإيدك، بتشغّلي أوامر وهو بيقوم بالشغل.
