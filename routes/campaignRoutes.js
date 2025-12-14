@@ -14,6 +14,7 @@ const campaignCommand = require("../commands/campaignCommand");
 // GET all campaigns
 router.get("/", async function (req, res) {
   const data = await campaignQuery.getRecords(); 
+  console.log(data)
   // بدون فلتر، يرجع كل الحملات
   return res.status(200).json(data);
 });

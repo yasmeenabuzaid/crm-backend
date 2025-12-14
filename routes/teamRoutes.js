@@ -1,18 +1,4 @@
-// const express =require("express");
-// const router  =express.Router();
-// const teamController = require("../controllers/teamController");
 
-// // Create Team
-// router.post("/", teamController.createTeam);
-// router.get("/", teamController.getAllTeams);
-
-// // Update Team
-// router.put("/:id", teamController.updateTeam);
-
-// // Delete Team
-// router.delete("/:id", teamController.deleteTeam);
-
-// module.exports = router;
 
 
 
@@ -27,6 +13,7 @@ router.get("/", async function (req, res) {
   const data = await teamQuery.getRecords();
   return res.status(200).json(data);
 });
+
 
 // Create Team
 router.post(
@@ -60,6 +47,15 @@ router.delete("/:id", async function (req, res) {
   const id = req.params.id;
   const data = await teamCommand.delRecord({ id });
   return res.status(200).json(data);
+});
+
+
+
+// Route لجلب القادة بناءً على teamId
+router.get("/:teamId/leaders", async function (req, res) {
+  const { teamId } = req.params;  // الحصول على teamId من URL
+    const leaders = await teamQuery.getLeaders(teamId);
+    return res.status(200).json(leaders);
 });
 
 module.exports = router;

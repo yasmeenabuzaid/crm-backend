@@ -39,20 +39,7 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-       userId:{
-        type:Sequelize.INTEGER,
-        allowNull:false,
-        references:{
-          model:"User",
-          key:"id"
-        },
-       onDelete: "CASCADE", 
-      },
-      is_deleted: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-      },
-
+    
       createdAt: {
         field: "created_at",
         type: Sequelize.DATE,

@@ -29,7 +29,7 @@ Team.belongsToMany(User, {
 
 User.belongsToMany(Team, {
   through: TeamUser,
-  foreignKey: "user_id",
+  foreignKey: "userId",
   as: "teams"
 });
 
@@ -40,7 +40,6 @@ Team.belongsTo(User, {
 });
 
 
-Team.belongsTo(User, { foreignKey: 'userId' });
 Lead.belongsTo(User, { foreignKey: 'userId' });
 Campaign.belongsTo(User,{foreignKey: "userId"});
 
