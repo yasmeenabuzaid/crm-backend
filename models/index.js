@@ -40,6 +40,10 @@ Team.belongsTo(User, {
 });
 
 
+Team.belongsTo(User, { foreignKey: 'userId' });
+Lead.belongsTo(User, { foreignKey: 'userId' });
+Campaign.belongsTo(User,{foreignKey: "userId"});
+
 module.exports = { 
   Campaign, Lead, CampaignLead,
   Team, User, TeamUser

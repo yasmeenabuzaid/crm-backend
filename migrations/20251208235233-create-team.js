@@ -32,7 +32,15 @@ module.exports = {
         allowNull: false,
         defaultValue: "active",
       },
-
+         userId:{
+        type:Sequelize.INTEGER,
+        allowNull:false,
+        references:{
+          modal:"User",
+          key:"id"
+        },
+       onDelete: "CASCADE", 
+      },
       createdAt: {
         field: "created_at",
         type: Sequelize.DATE,

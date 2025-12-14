@@ -25,6 +25,17 @@ const Team = sequelize.define("Team", {
     type: DataTypes.ENUM("active", "inactive"),
     defaultValue: "active",
   },
+   userId:{
+    type:DataTypes.INTEGER,
+    allowNull:false,
+    references:{
+      model:"User",
+      key:"id"
+    },
+         onDelete: "CASCADE",  // حذف الـ Lead إذا تم حذف المستخدم
+
+  },
 });
+
 
 module.exports = Team;

@@ -26,6 +26,15 @@ const Campaign = sequelize.define("Campaign" , {
    },
    budget: {
     type: DataTypes.FLOAT,
+  },
+  userId:{
+    type:DataTypes.INTEGER,
+    allowNull:false,
+    references:{
+      model:"User",
+      key:"id"
+    }
   }
 });
+
 module.exports = Campaign;

@@ -31,10 +31,21 @@ const Lead = sequelize.define("Lead", {
   notes: {
     type: DataTypes.TEXT,
   },
+   userId:{
+    type:DataTypes.INTEGER,
+    allowNull:false,
+    references:{
+      model:"User",
+      key:"id"
+    },
+     onDelete: "CASCADE",  // حذف الـ Lead إذا تم حذف المستخدم
+  },
   is_deleted: {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   }
 });
+
+
 
 module.exports = Lead;

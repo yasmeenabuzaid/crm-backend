@@ -35,6 +35,15 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: true,
       },
+      userId:{
+        type:Sequelize.INTEGER,
+        allowNull:false,
+        references:{
+          modal:"User",
+          key:"id"
+        },
+       onDelete: "CASCADE",  // في حالة حذف المستخدم، يتم حذف الحملة المرتبطة أيضًا
+      },
       createdAt: {
         field: "created_at",
         type: Sequelize.DATE,
