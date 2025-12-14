@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize  =require("../config/database");
+const { User } = require("./User");
 
 const Lead = sequelize.define("Lead", {
   id: {
@@ -31,20 +32,22 @@ const Lead = sequelize.define("Lead", {
   notes: {
     type: DataTypes.TEXT,
   },
-   userId:{
-    type:DataTypes.INTEGER,
-    allowNull:false,
-    references:{
-      model:"User",
-      key:"id"
+     userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field: "userId", // ⭐ لأن العمود camelCase في DB
     },
-     onDelete: "CASCADE",  // حذف الـ Lead إذا تم حذف المستخدم
-  },
   is_deleted: {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   }
-});
+},
+  {
+    tableName: "Lead",
+    timestamps: true,
+    underscored: true,
+  }
+);
 
 
 

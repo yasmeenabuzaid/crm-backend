@@ -3,7 +3,7 @@ const Lead = require("./Lead");
 const CampaignLead = require("./CampaignLead");
 
 const Team = require("./Team");
-const User = require("./User");
+const {User} = require("./User");
 const TeamUser = require("./TeamUser");
 
 // Campaign - Lead (Many-to-Many)

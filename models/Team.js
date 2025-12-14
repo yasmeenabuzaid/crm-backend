@@ -1,5 +1,8 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
+const { User } = require("./User");
+
+
 const Team = sequelize.define("Team", {
   id: {
     type: DataTypes.INTEGER,
@@ -25,17 +28,18 @@ const Team = sequelize.define("Team", {
     type: DataTypes.ENUM("active", "inactive"),
     defaultValue: "active",
   },
-   userId:{
-    type:DataTypes.INTEGER,
-    allowNull:false,
-    references:{
-      model:"User",
-      key:"id"
+ userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field: "userId", // ⭐ لأن العمود camelCase في DB
     },
-         onDelete: "CASCADE",  // حذف الـ Lead إذا تم حذف المستخدم
+},  {
+    tableName: "Team",
+    timestamps: true,
+    underscored: true,
+  }
 
-  },
-});
+);
 
 
 module.exports = Team;

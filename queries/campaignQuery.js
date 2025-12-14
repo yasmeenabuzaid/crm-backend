@@ -52,6 +52,7 @@ const getRecords = async (filters = {}, exclude = [], columns = []) => {
     }
    // بنستخدم Campaign Model عشان نستعلم عن البيانات
     const resp = await Campaign.findAll({
+    
       where: { ...filters },
       // بنحدد ال attributes اللي عايزينها
       //معنى ال ...
@@ -62,6 +63,7 @@ const getRecords = async (filters = {}, exclude = [], columns = []) => {
       attributes: attributes,
       //    بنطبق ال filters على الاستعلام
     });
+    console.log("Campaign Records Retrieved:", resp);
     // نرجع النتيجة
     return resp;
   } catch (error) {
