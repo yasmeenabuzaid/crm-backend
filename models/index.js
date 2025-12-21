@@ -19,7 +19,6 @@ Lead.belongsToMany(Campaign, {
   otherKey: "campaign_id"
 });
 
-
 // Team - User (Many-to-Many)
 Team.belongsToMany(User, {
   through: TeamUser,
@@ -39,8 +38,16 @@ Team.belongsTo(User, {
   as: "leader",
 });
 
+TeamUser.belongsTo(User, {
+  foreignKey: "user_id"
+});
+
+User.hasMany(TeamUser, {
+  foreignKey: "user_id"
+});
 
 Lead.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Lead, { foreignKey: 'user_id', as: 'leads' });
 Campaign.belongsTo(User,{foreignKey: "userId"});
 
 module.exports = { 

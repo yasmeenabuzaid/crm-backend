@@ -1,5 +1,7 @@
 // queries/teamQuery.js
-const { Team , User} = require("../models");
+const { Team } = require("../models");
+const { TeamUser } = require("../models");
+const { User } = require("../models");
 
 // دالة لجلب جميع الفرق بناءً على الفلاتر
 const getRecords = async (filters = {}, exclude = [], columns = []) => {
@@ -31,8 +33,8 @@ const getRecord = async (filters = {}, exclude = [], columns = []) => {
     }
 
     const result = await Team.findOne({
-      where: { ...filters },  // نطبق الفلاتر (شروط WHERE)
-      attributes: attributes, // نحدد الأعمدة اللي نرجعها
+      where: { ...filters }, 
+      attributes: attributes, 
     });
     
     return result;
@@ -42,40 +44,32 @@ const getRecord = async (filters = {}, exclude = [], columns = []) => {
 };
 
 
-
-
-
-// دالة لجلب القادة بناءً على الفريق
-const getLeaders = async (teamId) => {
+const getMembers = async (teamId, columns = ["user_id"]) => {
   try {
-    // استعلام لجلب القادة فقط من جدول TeamUser
-    const leaders = await TeamUser.findAll({
+    const res = await TeamUser.findAll({
       where: {
-        team_id: teamId,  
-        role_in_team: "leader", 
+        team_id: teamId,
+        deleted_at: null
       },
-      include: [
+        include: [
         {
-          model: User,  
-          as: "user",  
-          attributes: ["id", "name"], 
-        },
-        {
-          model: Team,  
-          as: "team",
-          attributes: ["id", "name"],  
-        },
+          model: User,
+          attributes: ["id", "name"]
+        }
       ],
+      attributes: columns
     });
-
-    return leaders; 
+    return res;
   } catch (error) {
-    console.error("Error fetching leaders:", error);
-    return { error: error.message };
+    throw error;
   }
 };
+
+
+
+
 module.exports = {
   getRecords,
   getRecord,
-  getLeaders,
+  getMembers
 };

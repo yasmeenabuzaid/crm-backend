@@ -1,4 +1,3 @@
-
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
@@ -20,19 +19,19 @@ const User = sequelize.define("User", {
     allowNull: true,
   },
 
-  // صلاحيات على مستوى النظام
   system_role: {
     type: DataTypes.ENUM("admin", "manager", "employee", "viewer"),
     defaultValue: "employee",
   },
 
-  // حالة المستخدم
   status: {
     type: DataTypes.ENUM("active", "inactive"),
     defaultValue: "active",
   },
+}, {
+  tableName: 'User',  // تأكد من اسم الجدول
+  timestamps: true,    // تأكد من تمكين timestamps
+  underscored: true,   // تأكد من أنه سيتم استخدام snake_case
 });
 
-module.exports ={ User};
-
-
+module.exports = { User };
