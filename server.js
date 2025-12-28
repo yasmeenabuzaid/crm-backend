@@ -11,14 +11,15 @@ const campaignRoutes = require("./routes/campaignRoutes");
 const leadRoutes = require("./routes/leadRoutes");
 const teamRoutes = require("./routes/teamRoutes");
 const userRoutes = require("./routes/userRoutes");
- const internalRoutes = require("./routes/internal"); 
+// const internalRoutes = require("./routes/internal"); 
+const activityRoutes = require("./routes/activityRoutes");
 // Use Routes
 app.use("/api/campaigns", campaignRoutes);
 app.use("/api/leads" ,leadRoutes );
 app.use("/api/teams", teamRoutes);
-app.use("/api/users",userRoutes )
-app.use("/api/internal" , internalRoutes);
-
+app.use("/api/users",userRoutes );
+// app.use("/api/internal" , internalRoutes);
+app.use("/api/activity",activityRoutes);
 
 
 

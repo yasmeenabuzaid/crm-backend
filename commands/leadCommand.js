@@ -1,4 +1,4 @@
-const {Lead } = require("../models");
+const { Lead, Activity } = require("../models");
 
 const createRecord = async (recordData) =>{
     try{
@@ -23,18 +23,27 @@ try{
 };
 
 
-const delRecord = async (filter) => {
-    try {
-      const deletedRecords = await Lead.destroy({
-        where: filter,
-      });
-      return deletedRecords;
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
 
- const updateleadwithteam = async (req, res) => {
+const delRecord = async (filter) => {
+  try {
+    // 1. تحقق من وجود سجلات مرتبطة بالعميل في جدول Activity باستخدام client_id
+    const activityRecords = await Activity.findAll({ where: { client_id: filter.id } });
+
+    // 2. إذا كانت هناك سجلات مرتبطة، قم بحذفها أولاً
+    if (activityRecords.length > 0) {
+      await Activity.destroy({ where: { client_id: filter.id } });
+    }
+
+    // 3. حذف العميل من جدول Lead
+    const deletedRecords = await Lead.destroy({ where: filter });
+
+    return { activityRecordsDeleted: activityRecords.length, leadDeleted: deletedRecords };
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const updateleadwithteam = async (req, res) => {
   const { leadIds, teamId } = req.body;
   try {
     await Lead.update({ team_id: teamId }, { where: { id: leadIds } });
@@ -43,6 +52,7 @@ const delRecord = async (filter) => {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 
   

@@ -5,6 +5,7 @@ const CampaignLead = require("./CampaignLead");
 const Team = require("./Team");
 const {User} = require("./User");
 const TeamUser = require("./TeamUser");
+const  Activity  = require("./Activity");
 
 // Campaign - Lead (Many-to-Many)
 Campaign.belongsToMany(Lead, { 
@@ -63,7 +64,10 @@ Lead.belongsTo(Team, {
 });
 
 
+Lead.hasMany(Activity ,{foreignKey:'client_id'});
+Activity.belongsTo(Lead,{foreignKey:'client_id'});
+
 module.exports = { 
   Campaign, Lead, CampaignLead,
-  Team, User, TeamUser
+  Team, User, TeamUser , Activity
 };
