@@ -34,6 +34,17 @@ const delRecord = async (filter) => {
     }
   };
 
+ const updateleadwithteam = async (req, res) => {
+  const { leadIds, teamId } = req.body;
+  try {
+    await Lead.update({ team_id: teamId }, { where: { id: leadIds } });
+    res.status(200).json({ message: "Leads assigned successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+
   
 // =====================soft Delete ==================================
 // const delRecord = async (filter) => {
@@ -56,4 +67,5 @@ module.exports ={
     createRecord,
     updateRecord,
     delRecord,
+    updateleadwithteam,
 };

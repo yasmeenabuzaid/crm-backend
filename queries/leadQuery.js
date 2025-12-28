@@ -53,8 +53,32 @@ try{
 }
 };
 
+
+const getLeadsWithoutTeam = async (filters = {}, exclude = [], columns = []) => {
+  try {
+    let attributes = { exclude: exclude };
+    if (columns?.length) {
+      attributes.includes = columns;
+    }
+
+    const resp = await Lead.findAll({
+      where: {
+        ...filters,
+        team_id: null,  
+      },
+      attributes: attributes,
+    });
+
+    return resp;
+  } catch (error) {
+    // return { error: error };
+    throw error;
+  }
+};
+
 module.exports={
     getLeads,
     getLead,
-    getLeadWithCampaigns
+    getLeadWithCampaigns,
+   getLeadsWithoutTeam,
 }

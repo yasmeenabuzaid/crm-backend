@@ -50,6 +50,19 @@ Lead.belongsTo(User, { foreignKey: 'userId' });
 User.hasMany(Lead, { foreignKey: 'user_id', as: 'leads' });
 Campaign.belongsTo(User,{foreignKey: "userId"});
 
+
+// relation team with leads
+Team.hasMany(Lead, {
+  foreignKey: 'team_id', // المفتاح الخارجي في جدول العملاء
+  as: 'leads', // استخدام هذا الاسم للوصول إلى العملاء من الفريق
+});
+
+Lead.belongsTo(Team, {
+  foreignKey: 'team_id', // المفتاح الخارجي في جدول العملاء
+  as: 'team', // استخدام هذا الاسم للوصول إلى الفريق من العميل
+});
+
+
 module.exports = { 
   Campaign, Lead, CampaignLead,
   Team, User, TeamUser

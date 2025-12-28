@@ -34,9 +34,19 @@ const Lead = sequelize.define("Lead", {
   },
      userId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      field: "userId", // ⭐ لأن العمود camelCase في DB
+      allowNull: true,
+      field: "user_id", 
     },
+      // إضافة مفتاح خارجي للفريق
+  team_id: {
+    type: DataTypes.INTEGER,
+    allowNull: true, 
+    references: {
+      model: 'Team',  // اسم جدول الفرق
+      key: 'id'       // المفتاح الأساسي في جدول الفرق
+    },
+    field: 'team_id'
+  },
   is_deleted: {
     type: DataTypes.BOOLEAN,
     defaultValue: false,

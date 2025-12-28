@@ -95,5 +95,33 @@ router.get("/:teamId/members", async (req, res) => {
   return res.status(200).json(data);
 });
 
+// router.delete("/teams/:teamId/members/:userId" , async (req ,res) =>{
+//    const { teamId, userId } = req.params;
+//      const deletedmember= await deletemembers(teamId, userId);
+//      return res.status(200).json(deletedmember);
+// });
 
+router.delete("/:teamId/members/:userId", async (req, res) => {
+  const { teamId, userId } = req.params;  // استخراج teamId و userId من الـ params
+  
+  // التحقق من أن قيم المعاملات موجودة
+  if (!teamId || !userId) {
+    return res.status(400).json({ error: "teamId and userId are required" });
+  }
+
+  try {
+    // استدعاء الدالة deletemembers لحذف العضو
+    const deletedMemberCount = await teamUserCommand.deletemembers(teamId, userId);
+
+    // إذا كانت القيمة المحذوفة أكثر من 0، فهذا يعني أنه تم حذف العضو بنجاح
+    if (deletedMemberCount > 0) {
+      return res.status(200).json({ message: `${deletedMemberCount} member(s) deleted successfully` });
+    } else {
+      return res.status(404).json({ message: "Member not found or already deleted" });
+    }
+  } catch (error) {
+    console.error("Error during member deletion:", error);
+    return res.status(500).json({ error: "An error occurred while deleting the member." });
+  }
+});
 module.exports = router;

@@ -64,5 +64,25 @@ router.put(
     }
   );
   
+  
+// Route لجلب جميع العملاء الذين ليس لديهم فريق
+router.get("/without-team", async function (req, res) {
+  try {
+    // يمكن أن تمرر أي فلاتر إضافية إن أردت (مثل: status, name, etc)
+    const data = await leadQuery.getLeadsWithoutTeam();
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(500).json({ error: "Error fetching leads without team" });
+  }
+});
+
+router.post("/assign-team", async (req, res) => {
+  try {
+    const data = await leadCommand.updateleadwithteam(req, res);
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(500).json({ error: "Error create team" });
+  }
+});
 
 module.exports =router;
