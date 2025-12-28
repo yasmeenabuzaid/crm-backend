@@ -18,14 +18,14 @@ const Activity = sequelize.define("Activity", {
   },
   timestamp: {
     type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW, // يتم تعيين التاريخ الحالي عند إضافة النشاط
+    defaultValue: DataTypes.NOW, 
   },
   client_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Lead',  // اسم الجدول الذي يحتوي على العملاء
-      key: 'id',  // المفتاح الأساسي في جدول العملاء
+      model: 'Lead',  
+      key: 'id',  
     },
     field: 'client_id',
   },

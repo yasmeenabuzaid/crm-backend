@@ -1,46 +1,8 @@
 const { Campaign, Lead } = require("../models");
 
-// بنستخدم Destructuring عشان نجيب Models اللي هنشتغل عليها
-// هنا جايبن Campaign و Lead من models/index.js
-// Models دي بتسمح لنا نتعامل مع الجداول في DB كأنها كائنات في الكود
-// بدل ما نكتب SQL مباشرة
-// ده بيسهل علينا كتابة الكود ويخليه أكثر وضوحًا وقابلية للصيانة
 
-//--------------------------------------------
-//معنى destructuring:
-
-//بدون Destructuring:
-//const models = require("../models");
-//const Campaign = models.Campaign;
-//const Lead = models.Lead;
-
-//مع Destructuring:
-//const { Campaign, Lead } = require("../models");
-//ليش نحط require داخل متغير؟
-//عشان نقدر نستخدم القيمة اللي يرجعها require بعدين في الكود
-
-
-//--------------------------------------------
-//دالة لجلب سجلات من جدول Campaign
-
-
-// filters
-// شروط البحث (WHERE)
-
-// exclude
-// أعمدة بدنا نستبعدها من النتيجة
-
-// columns
-// أعمدة محددة بدنا نرجعها فقط
 const getRecords = async (filters = {}, exclude = [], columns = []) => {
-//نستخدم async عشان نقدر نستخدم await جواها
-// await بتوقف تنفيذ الكود لحد ما العملية اللي بعدها تخلص
-// فلو العملية بتاخد وقت (زي استعلام DB)، الكود مش هيكمل لحد ما يخلص
-// ده بيساعدنا نتعامل مع العمليات اللي بتاخد وقت بطريقة أسهل
-//وال filters, exclude, columns دول parameters بنستخدمهم عشان نحدد ايه البيانات اللي عايزينها من DB
-//filters بنستخدمها عشان نحدد شروط الاستعلام (زي WHERE في SQL)
-//exclude بنستخدمها عشان نستبعد أعمدة معينة من النتيجة
-//columns بنستخدمها عشان نحدد أعمدة معينة عايزين نرجعها
+
 
   try {
     let attributes = { exclude: exclude };
